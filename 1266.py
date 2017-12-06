@@ -13,3 +13,4 @@ for index, value in enumerate(b):
         postes = (cont-1)/2 if (cont%2 != 0) else cont/2
         cont = 0
         postes_totais += postes
+dsadsa
