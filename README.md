@@ -1,1 +1,1 @@
-Exercícios do URI Online Judge, escritos com a linguagem Python
+Exercícios do URI Online Judge
