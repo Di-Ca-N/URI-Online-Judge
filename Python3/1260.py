@@ -1,27 +1,32 @@
-file = open("out.txt", "w")
+#out = open("out.txt", 'w')
 
 try:
-	t = int(input())
-	for i in range(t):
+	test_cases = int(input())
+	blank = input()
+	space = False
+
+	for i in range(test_cases):
 		forest = {}
-		cont = 0
-		tree = input()
-
-		while tree != "":
-			if tree in forest:
-				forest[tree] += 1
-			else:
-				forest[tree] = 1
-			cont += 1
+		total = 0
+		tree = " "
+		while tree:
 			tree = input()
+			if tree:
+				if tree in forest:
+					forest[tree] += 1
+				else:
+					forest[tree] = 1
+				total += 1
 
-		keys = list(forest.keys())
-		keys.sort()
+		if space:
+			#out.write("\n")
+			print()
 
-		for key in keys:
-			file.write("{} {:.4f}\n".format(key, forest[key] / cont * 100))
+		for key in sorted(forest.keys()):
+			#out.write("{} {:.4f}\n".format(key, forest[key] / total * 100))
+			print("{} {:.4f}".format(key, forest[key] / total * 100))
 
-		if i != t-1:
-			file.write("\n")
+		space = True
+
 except EOFError:
 	pass
