@@ -1,4 +1,7 @@
 *.exe
 .idea/
+.vscode/
 *.sublime-*
 out.txt
+input.txt
+a.out

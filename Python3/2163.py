@@ -1,32 +1,35 @@
-l, c = map(int,input().split())
-matriz = []
-valor = None
+l, c = [int(x) for x in input().split()]
+matriz = [[0 for _ in range(c)] for _ in range(l)]
+
+possible_sabers = []
 
 for i in range(l):
-	matriz.append(input().split())
+    for j, v in enumerate(input().split()):
+        v = int(v)
+        matriz[i][j] = v
+        if v == 42:
+            possible_sabers.append((i, j))
 
-for linha in range(l):
-	for coluna in range(c):
-		if matriz[linha][coluna] == "42":
-			valor = (linha,coluna)
+final = (0, 0)
 
-		if valor:
-			k,j = valor
-			localizado = True
-			considerados = ((k-1, j-1), (k-1, j), (k-1, j+1),
-							(k,   j-1),           (k,   j+1),
-							(k+1, j-1), (k+1, j), (k+1, j+1))
+pattern = [
+    (-1 , -1), (-1, 0), (-1, 1),
+    (0, -1), (0, 1),
+    (1, -1), (1, 0), (1, 1),
+]
 
-			for casa in considerados:
-				x, y = casa
-				try:
-					if x < 0:
-						x = None
-					if matriz[x][y] != "7":
-						localizado = False
-				except:
-					pass
-			valor = None
-			if localizado == True:
-				print(x,y)
-				exit()
+for a, b in possible_sabers:
+    for x, y in pattern:
+        adx = a + x
+        ady = b + y
+        
+        if 0 <= adx < l and 0 <= ady < c:
+            if matriz[adx][ady] != 7:
+                break
+        else:
+            break
+    else:
+        final = a + 1, b + 1
+    
+print(*final)
+

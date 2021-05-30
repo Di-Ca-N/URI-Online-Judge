@@ -1,32 +1,44 @@
-# TODO: terminar
+def merge_sort_and_count(array, left, right):
+    if left >= right:
+        return 0
 
-def merge_sort_and_count(array):
-	if len(array) == 1:
-		return 0
+    m = (left + right) // 2
 
-	ar1 = merge_sort_and_count(array[:len(array)//2])
-	ar2 = merge_sort_and_count(array[len(array)//2:])
+    inv1 = merge_sort_and_count(array, left, m)
+    inv2 = merge_sort_and_count(array, m + 1, right)
 
-	inversoes = ar1 + ar2
+    inversoes = inv1 + inv2
 
-	while ar2:
-		while ar1 and ar1[0] <= ar2[0]:
-			ar1.pop(0)
+    s1 = left
+    s2 = m + 1
 
-		ar2.pop(0)
-		inversoes += len(ar1)
+    while s1 <= m and s2 <= right:
+        if array[s1] <= array[s2]:
+            s1 += 1
+            continue
+        
+        inversoes += s2 - s1
+        v = array[s2]
+        for i in range(s2, s1 - 1, -1):
+            array[i] = array[i - 1]
 
-	return inversoes
+        array[s1] = v
 
+        s2 += 1
+        s1 += 1
+        m += 1
 
-seq = [int(x)-1 for x in input().split()[1:]]
+    return inversoes
+   
 
-while seq != []:
-	inversions = merge_sort_and_count(seq)
-	print(inversions)
-	if inversions % 2 == 1:
-		print("Marcelo")
-	else:
-		print("Carlos")
+qtd, *seq = [int(x) for x in input().split()]
 
-	seq = [int(x)-1 for x in input().split()[1:]]
+while qtd != 0:
+    inversions = merge_sort_and_count(seq, 0, qtd - 1)
+    print(inversions)
+    if inversions % 2 == 1:
+        print("Marcelo")
+    else:
+        print("Carlos")
+
+    qtd, *seq = [int(x) for x in input().split()]

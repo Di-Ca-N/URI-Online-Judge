@@ -1,22 +1,21 @@
 while True:
-	valores = input().split()
-	saida = []
-	n = int(valores[0])
-	d = a = int(valores[1])
-	e = b = int(valores[2])
+    valores = input().split()
 
-	if n == 0 and a == 0 and b == 0:
-		break
-	
-	try:
-		while True:
-			d, e = e, d%e
+    n = int(valores[0])
+    d = a = int(valores[1])
+    e = b = int(valores[2])
 
-	except ZeroDivisionError:
-		c = (a*b)//d
+    if n == 0 and a == 0 and b == 0:
+        break
+    
 
-	a_l = len(range(1,n+1,a))
-	b_l = len(range(1,n+1,b))
-	c_l = len(range(1,n+1,c))
+    while e != 0:
+        d, e = e, d % e
 
-	print(a_l+b_l-c_l)
+    c = (a * b) // d
+
+    a_l = len(range(a, n + 1, a))
+    b_l = len(range(b, n + 1, b))
+    c_l = len(range(c, n + 1, c))
+
+    print(a_l + b_l - c_l)
